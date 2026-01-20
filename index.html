@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Amplop</title>
+
+<style>
+body{
+  margin:0;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:#fce4ec;
+  overflow:hidden;
+}
+
+.envelope{
+  width:280px;
+  height:180px;
+  position:relative;
+  cursor:pointer;
+  perspective:1000px;
+}
+
+.back{
+  width:100%;
+  height:100%;
+  background:#f48fb1;
+  position:absolute;
+}
+
+.front{
+  position:absolute;
+  width:0;
+  height:0;
+  border-left:140px solid transparent;
+  border-right:140px solid transparent;
+  border-bottom:90px solid #f06292;
+  bottom:0;
+  z-index:2;
+}
+
+.flap{
+  position:absolute;
+  top:0;
+  width:0;
+  height:0;
+  border-left:140px solid transparent;
+  border-right:140px solid transparent;
+  border-top:90px solid #f8bbd0;
+  transform-origin:top;
+  transition:transform 1.3s ease;
+  z-index:3;
+}
+
+.envelope.open .flap{
+  transform: rotateX(-110deg);
+}
+
+.letter{
+  position:absolute;
+  width:240px;
+  height:150px;
+  background:white;
+  top:15px;
+  left:20px;
+  z-index:1;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-family:sans-serif;
+  transition:transform 1s ease, opacity 1s;
+}
+
+.envelope.open .letter{
+  transform: translateY(-120px);
+  opacity:0;
+}
+</style>
+</head>
+
+<body>
+
+<audio id="music" src="audio/monokrom.mp3"></audio>
+
+<div class="envelope" onclick="openEnvelope()">
+  <div class="back"></div>
+  <div class="letter">Klik Aku 💌</div>
+  <div class="front"></div>
+  <div class="flap"></div>
+</div>
+
+<script>
+function openEnvelope(){
+  document.querySelector('.envelope').classList.add('open');
+  document.getElementById('music').play();
+
+  setTimeout(()=>{
+    window.location.href = "greeting.html";
+  },1500);
+}
+</script>
+
+</body>
+</html>
